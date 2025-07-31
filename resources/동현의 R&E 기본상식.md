@@ -5,7 +5,9 @@
 -> 그래도 이해 안되면 딥러인 개념 이해용 영상들을 보면 됨  
 
 [회귀계수 해석법 - tistory](https://bluediary8.tistory.com/157)\
-[크로스 엔트로피 함수](https://velog.io/@rcchun/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%ED%81%AC%EB%A1%9C%EC%8A%A4-%EC%97%94%ED%8A%B8%EB%A1%9C%ED%94%BCcross-entropy)
+[크로스 엔트로피 함수](https://velog.io/@rcchun/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%ED%81%AC%EB%A1%9C%EC%8A%A4-%EC%97%94%ED%8A%B8%EB%A1%9C%ED%94%BCcross-entropy)\
+[베르누이 분포](https://datascienceschool.net/02%20mathematics/08.02%20%EB%B2%A0%EB%A5%B4%EB%88%84%EC%9D%B4%EB%B6%84%ED%8F%AC%EC%99%80%20%EC%9D%B4%ED%95%AD%EB%B6%84%ED%8F%AC.html)
+
 
 ### 딥러닝 개념 이해용{아래부터 보는걸 추천}
 [트렌스포머](https://youtu.be/g38aoGttLhI?si=6FR8NSpRfclspLd8)\
