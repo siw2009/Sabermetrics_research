@@ -4,6 +4,14 @@
 ~~[로지스틱 회귀 - wikipedia](http://ko.wikipedia.org/wiki/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1_%ED%9A%8C%EA%B7%80)~~ -> [이게더 이해하기 쉬움](https://wikidocs.net/22881)\
 [회귀계수 해석법 - tistory](https://bluediary8.tistory.com/157)
 
+### 딥러닝 개념 이해용
+[트렌스포머](https://youtu.be/g38aoGttLhI?si=6FR8NSpRfclspLd8)\
+[백프로파게이션2](https://youtu.be/HKqdFQfXVhw?si=OKyEVeNtblkSvkPf)\
+[백프로파게이션](https://youtu.be/tkH7KgLZc0E?si=YYTlYq7MbtqdE1qd)\
+[경사하강법](https://youtu.be/8861RzFOFs8?si=kK6KAGg5YuiTHf3d)\
+[뉴럴네트워크](https://youtu.be/wrguEHxk_EI?si=SAo0gbOsBtzyahrB)\
+[LLM](https://youtu.be/HnvitMTkXro?si=0atF_nHY-4EwcTTa)
+
 ---
 ## 지금 해야되는 일
  - [ ] 할일/ 배울것 정리하기
