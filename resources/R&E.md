@@ -1,7 +1,7 @@
 주제 : 야구에서의 새로운 평가 선수지표 만들기
 
 ### 참고 문헌
-[로지스틱 회귀 - wikipedia](http://ko.wikipedia.org/wiki/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1_%ED%9A%8C%EA%B7%80)
+[로지스틱 회귀 - wikipedia](http://ko.wikipedia.org/wiki/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1_%ED%9A%8C%EA%B7%80)\
 [회귀계수 해석법 - tistory](https://bluediary8.tistory.com/157)
 
 ---
@@ -18,5 +18,5 @@
 	- HPA 계산 공식(할푼리 형태) -> 회귀계수 해석으로 알아냄
 	- 성능 검증 -> 실제 야구선수로 성능검증?
 3. 기존 타율과 개발된 HPA의 성능비교
-	 - ==컨택 히터==나 장타자 등 특정 유형의 타자에 따라 차별적인 가치를 지니는지 비교
+	 - **컨택 히터**나 장타자 등 특정 유형의 타자에 따라 차별적인 가치를 지니는지 비교
 	 - HPA활용될 수 있는 방안 찾기
