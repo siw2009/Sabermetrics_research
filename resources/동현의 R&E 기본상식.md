@@ -2,10 +2,12 @@
 
 ### 참고 문헌
 ~~[로지스틱 회귀 - wikipedia](http://ko.wikipedia.org/wiki/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1_%ED%9A%8C%EA%B7%80)~~ -> [이게더 이해하기 쉬움](https://wikidocs.net/22881)\
+-> 그래도 이해 안되면 딥러인 개념 이해용 영상들을 보면 됨  
+
 [회귀계수 해석법 - tistory](https://bluediary8.tistory.com/157)\
 [크로스 엔트로피 함수](https://velog.io/@rcchun/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%ED%81%AC%EB%A1%9C%EC%8A%A4-%EC%97%94%ED%8A%B8%EB%A1%9C%ED%94%BCcross-entropy)
 
-### 딥러닝 개념 이해용
+### 딥러닝 개념 이해용{아래부터 보는걸 추천}
 [트렌스포머](https://youtu.be/g38aoGttLhI?si=6FR8NSpRfclspLd8)\
 [백프로파게이션2](https://youtu.be/HKqdFQfXVhw?si=OKyEVeNtblkSvkPf)\
 [백프로파게이션](https://youtu.be/tkH7KgLZc0E?si=YYTlYq7MbtqdE1qd)\
