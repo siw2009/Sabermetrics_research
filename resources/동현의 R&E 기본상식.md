@@ -1,7 +1,7 @@
 주제 : 야구에서의 새로운 평가 선수지표 만들기
 
 ### 참고 문헌
-[로지스틱 회귀 - wikipedia](http://ko.wikipedia.org/wiki/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1_%ED%9A%8C%EA%B7%80)\
+~~[로지스틱 회귀 - wikipedia](http://ko.wikipedia.org/wiki/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1_%ED%9A%8C%EA%B7%80)~~ -> [이게더 이해하기 쉬움](https://wikidocs.net/22881)\
 [회귀계수 해석법 - tistory](https://bluediary8.tistory.com/157)
 
 ---
