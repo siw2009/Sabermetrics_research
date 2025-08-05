@@ -17,7 +17,8 @@
 [백프로파게이션](https://youtu.be/tkH7KgLZc0E?si=YYTlYq7MbtqdE1qd)\
 [경사하강법](https://youtu.be/8861RzFOFs8?si=kK6KAGg5YuiTHf3d)\
 [뉴럴네트워크](https://youtu.be/wrguEHxk_EI?si=SAo0gbOsBtzyahrB)\
-[LLM](https://youtu.be/HnvitMTkXro?si=0atF_nHY-4EwcTTa)
+[LLM](https://youtu.be/HnvitMTkXro?si=0atF_nHY-4EwcTTa)\
+[어텐션](https://youtu.be/_Z3rXeJahMs?si=ieoN6M-nCKcM03aB)
 
 ---
 ## 지금 해야되는 일
