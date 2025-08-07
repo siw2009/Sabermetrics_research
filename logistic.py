@@ -60,14 +60,17 @@ def read_data(paths: list[str]) -> list[list[float]]:
 
 
 
+step = 0.5
 inputval = [random() * 6 -3  for _ in range(2)]
 real_data = randint(0,1)
 weight = [random() * 10 - 5  for _ in range(2)]
 bias = random() * 5 - 2
 
 
-for i in range(100000):
+for i in range(10 ** 9):
     prediction = predict(inputval, weight, bias)
-    weight = learn(weight, slope(real_data, prediction, inputval), 0.5)
-    bias = learn([bias], slope(real_data, prediction), 0.5)[0]
-    print(err(real_data, prediction))
+    weight = learn(weight, slope(real_data, prediction, inputval), step)
+    bias = learn([bias], slope(real_data, prediction), step)[0]
+
+    if i%10**6 == 0:
+        print(err(real_data, prediction))
