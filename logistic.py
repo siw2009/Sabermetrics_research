@@ -19,6 +19,7 @@
 
 
 from math import e, log1p
+from random import random
 
 
 
@@ -30,12 +31,13 @@ def discrete(x: float) -> int:
     return 1  if x>0.5 else  0
 
 
-def predict(input_data: list[list[float]]) -> list[float]:
-    return [sigmoid(input_data[0][i]*input_data[2][i] + input_data[1][i]*input_data[3][i] + input_data[4][i]) for i in range(10000)]
+def predict(input_data: list[list[float]], weights: list[float], bias: float) -> list[float]:
+    return [sigmoid(input_data[0][i]*weights[0] + input_data[1][i]*weights[1] + bias) for i in range(10000)]
 
 
-def err(realdata: float, prediction: float) -> float:
-    return (realdata-1) * log1p(-prediction) - realdata * log1p(prediction-1)
+def slope(realdata: float, prediction: float, inputval: float = 1.0) -> float:
+    # return (realdata-1) * log1p(-prediction) - realdata * log1p(prediction-1)
+    return (realdata - prediction) * inputval
 
 
 def read_data(paths: list[str]) -> list[list[float]]:
@@ -51,7 +53,11 @@ def read_data(paths: list[str]) -> list[list[float]]:
 
 
 
-input_data = read_data(['./inputs/x1-input.txt', './inputs/x2-input.txt', './inputs/w1-input.txt', './inputs/w2-input.txt', './inputs/b-input.txt'])
+weight = [random() * 10 - 5  for _ in range(2)]
+bias = random() * 5 - 2
+
+input_data = read_data(['./inputs/x1-input.txt', './inputs/x2-input.txt'])
 real_data = read_data(['./inputs/real.txt'])[0]
-prediction = predict(input_data)
-print([err(real_data[i], prediction[i]) for i in range(10000)])
+prediction = predict(input_data, weight, bias)
+
+print([slope(real_data[i], prediction[i], input_data[0][i]) for i in range(10000)])
