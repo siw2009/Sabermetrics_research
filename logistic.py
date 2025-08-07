@@ -68,7 +68,6 @@ bias = random() * 5 - 2
 
 for i in range(100000):
     prediction = predict(inputval, weight, bias)
-    grad_slope = slope(real_data, prediction, inputval)
-    weight = learn(weight, grad_slope, 0.5)
-    bias = learn([bias], grad_slope, 0.5)[0]
+    weight = learn(weight, slope(real_data, prediction, inputval), 0.5)
+    bias = learn([bias], slope(real_data, prediction), 0.5)[0]
     print(err(real_data, prediction))
