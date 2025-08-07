@@ -9,19 +9,35 @@
 # for path in ['./inputs/x1-input.txt', './inputs/x2-input.txt', './inputs/w1-input.txt', './inputs/w2-input.txt', './inputs/b-input.txt', ]:
 #     generate_x(path, -3, 3, 10000)
 
-from math import e
+
+
+from math import e, log1p
+
+
+
 def sigmoid(x: float) -> float:
     return 1 / (1+e**(-x))
+
 
 def discrete(x: float) -> int:
     return 1  if x>0.5 else  0
 
 
-input_data = []
-for path in ['./inputs/x1-input.txt', './inputs/x2-input.txt', './inputs/w1-input.txt', './inputs/w2-input.txt', './inputs/b-input.txt']:
-    input_data.append([])
-    with open(path, 'r') as f:
-        for i in range(10000):
-            input_data[-1].append(float(f.readline()))
+def err(realdata: float, prediction: float) -> float:
+    return (realdata-1) * log1p(-prediction) - realdata * log1p(prediction-1)
 
+
+def read_data(paths: list[str]) -> list[list[float]]:
+    rlt = []
+    for path in paths:
+        rlt.append([])
+
+        with open(path, 'r') as f:
+            for i in range(10000):
+                rlt[-1].append(float(f.readline()))
+    
+    return rlt
+
+
+input_data = read_data(['./inputs/x1-input.txt', './inputs/x2-input.txt', './inputs/w1-input.txt', './inputs/w2-input.txt', './inputs/b-input.txt'])
 print([discrete(sigmoid(input_data[0][i]*input_data[2][i] + input_data[1][i]*input_data[3][i] + input_data[4][i])) for i in range(10000)])
