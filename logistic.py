@@ -67,7 +67,7 @@ weight = [random() * 10 - 5  for _ in range(2)]
 bias = random() * 5 - 2
 
 
-for i in range(10 ** 9):
+for i in range(10 ** 8):
     prediction = predict(inputval, weight, bias)
     weight = learn(weight, slope(real_data, prediction, inputval), step)
     bias = learn([bias], slope(real_data, prediction), step)[0]
