@@ -6,6 +6,8 @@
 
 [모르는 용어있을때 검색 - 머신러닝 용어집](https://developers.google.com/machine-learning/glossary?hl=ko)
 
+[pandas참조용 - pandas공식](https://pandas.pydata.org/docs/reference/index.html)
+
 [회귀계수 해석법 - tistory](https://bluediary8.tistory.com/157)\
 [크로스 엔트로피 함수](https://velog.io/@rcchun/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%ED%81%AC%EB%A1%9C%EC%8A%A4-%EC%97%94%ED%8A%B8%EB%A1%9C%ED%94%BCcross-entropy)\
 [베르누이 분포](https://datascienceschool.net/02%20mathematics/08.02%20%EB%B2%A0%EB%A5%B4%EB%88%84%EC%9D%B4%EB%B6%84%ED%8F%AC%EC%99%80%20%EC%9D%B4%ED%95%AD%EB%B6%84%ED%8F%AC.html)
