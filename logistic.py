@@ -35,16 +35,16 @@ def predict(input_data: list[float], weights: list[float], bias: float) -> float
     return sigmoid(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias)
 
 
-def slope(realdata: float, prediction: float, inputval: float = 1.0) -> float:
-    return (realdata - prediction) * inputval
+def slope(realdata: int, prediction: float, inputval: list[float] = [1.0]) -> list[float]:
+    return [(realdata - prediction) * x for x in inputval]
 
 
-def err(realdata: float, prediction: float) -> float:
+def err(realdata: int, prediction: float) -> float:
     return (realdata-1) * log1p(-prediction) - realdata * log1p(prediction-1)
 
 
-def learn(weights: list[float]) -> list[float]:
-    return []
+def learn(weights: list[float], slopes: list[float], step: float) -> list[float]:
+    return [weights[i] + step * slopes[i]  for i in range(len(weights))]
 
 
 def read_data(paths: list[str]) -> list[list[float]]:
@@ -65,8 +65,8 @@ real_data = randint(0,1)
 weight = [random() * 10 - 5  for _ in range(2)]
 bias = random() * 5 - 2
 
-# input_data = read_data(['./inputs/x1-input.txt', './inputs/x2-input.txt'])
-# real_data = read_data(['./inputs/real.txt'])[0]
-prediction = predict(inputval, weight, bias)
-print([slope(real_data, prediction, inputval[i]) for i in range(2)])
-print(err(real_data, prediction))
+
+for i in range(100000):
+    prediction = predict(inputval, weight, bias)
+    weight = learn(weight, slope(real_data, prediction, inputval), 0.5)
+    print(err(real_data, prediction))
