@@ -6,5 +6,6 @@ def generate_x(path: str, start: float, end: float, cnt: int):
         for x in rlt:
             f.write(str(x) + '\n')
 
-generate_x('./inputs/x1-input.txt', -100, 100, 10000)
-generate_x('./inputs/x2-input.txt', 0, 1000, 10000)
+# generate_x('./inputs/x1-input.txt', -100, 100, 10000)
+# generate_x('./inputs/x2-input.txt', 0, 1000, 10000)
+# generate_x('./inputs/b-input.txt', -10, 10, 10000)
