@@ -1,6 +1,8 @@
 import pandas as pd
 
-df = "./datasets/테스트.xlsx"
-df2 = "./datasets/R&E데이터.xlsx"
+path = "./datasets/테스트.xlsx"
+path2 = "./datasets/R&E데이터.xlsx"
 
-df.pd.compare(df2)
+
+
+df.compare(df2)
