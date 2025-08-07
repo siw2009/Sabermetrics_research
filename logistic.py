@@ -18,7 +18,7 @@
 
 
 
-from math import e
+from math import e, log1p
 from random import random, randint
 
 
@@ -39,6 +39,14 @@ def slope(realdata: float, prediction: float, inputval: float = 1.0) -> float:
     return (realdata - prediction) * inputval
 
 
+def err(realdata: float, prediction: float) -> float:
+    return (realdata-1) * log1p(-prediction) - realdata * log1p(prediction-1)
+
+
+def learn(weights: list[float]) -> list[float]:
+    return []
+
+
 def read_data(paths: list[str]) -> list[list[float]]:
     rlt = []
     for path in paths:
@@ -53,11 +61,12 @@ def read_data(paths: list[str]) -> list[list[float]]:
 
 
 inputval = [random() * 6 -3  for _ in range(2)]
-real_data = [randint(0, 1) for _ in range(2)]
+real_data = randint(0,1)
 weight = [random() * 10 - 5  for _ in range(2)]
 bias = random() * 5 - 2
 
 # input_data = read_data(['./inputs/x1-input.txt', './inputs/x2-input.txt'])
 # real_data = read_data(['./inputs/real.txt'])[0]
 prediction = predict(inputval, weight, bias)
-print([slope(real_data[i], prediction, inputval[i]) for i in range(10000)])
+print([slope(real_data, prediction, inputval[i]) for i in range(2)])
+print(err(real_data, prediction))
