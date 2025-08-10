@@ -1,23 +1,3 @@
-# from random import random, randint
-# def generate_x(path: str, start: float, end: float, cnt: int):
-#     rlt = [random() * (end - start) + start for _ in range(cnt)]
-#     with open(path, 'w') as f:  f.write('')
-#     with open(path, 'a') as f:
-#         for x in rlt:
-#             f.write(str(x) + '\n')
-
-# for path in ['./inputs/x1-input.txt', './inputs/x2-input.txt', './inputs/w1-input.txt', './inputs/w2-input.txt', './inputs/b-input.txt', ]:
-#     generate_x(path, -3, 3, 10000)
-
-# with open('./inputs/real.txt', 'w') as f:  f.write('')
-# with open('./inputs/real.txt', 'a') as f:
-#     for i in range(10000):
-#         f.write(str(randint(0,1))+'\n')
-
-# exit()
-
-
-
 from math import e, log1p
 from random import random, randint
 
