@@ -5,7 +5,11 @@ from data_reader import *
 
 
 def sigmoid(x: float) -> float:
-    return 1 / (1+e**(-x))
+    try:
+        k = e**x
+        return k / (k+1)
+    except OverflowError:
+        return 1
 
 
 def discrete(x: float) -> int:
@@ -63,19 +67,19 @@ step = 0.0001
 inputval = data_split[1][:-1]
 # real_data = randint(0,1)
 real_data = data_split[2][:-1]
-# weight = [random() * 10 - 5  for _ in range(len(data_split[1][0]))]
-weight = [0] * (len(data_split[1][0]))
+# weight = [random() for _ in range(len(data_split[1][0]))]
+weight = [0] * len(data_split[1][0])
 # bias = random() * 5 - 2
 bias = random()
 
 
 # err_pred = predict(data_split[1][-1], weight, bias)
 # print(err(data_split[2][-1][0], err_pred))
-for i in range(10**3):
+for i in range(10**5):
     weight, bias = learn(inputval, real_data, weight, bias, step)
 
-    # if i%10**6 == 0:
-    #     print(err(real_data, prediction))
+    if i%10**3 == 0:
+        print(f'{i//1000}%')
 
 for i in range(len(inputval)):
     if real_data[i][0]:
