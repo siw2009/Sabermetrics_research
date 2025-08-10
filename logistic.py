@@ -69,12 +69,15 @@ weight = [0] * (len(data_split[1][0]))
 bias = random()
 
 
-err_pred = predict(data_split[1][-1], weight, bias)
-print(err(data_split[2][-1][0], err_pred))
-for i in range(10):
+# err_pred = predict(data_split[1][-1], weight, bias)
+# print(err(data_split[2][-1][0], err_pred))
+for i in range(10**3):
     weight, bias = learn(inputval, real_data, weight, bias, step)
 
     # if i%10**6 == 0:
     #     print(err(real_data, prediction))
-print(weight)
-print(bias)
+
+for i in range(len(inputval)):
+    if real_data[i][0]:
+        print(predict(inputval[i], weight, bias), end = ' ')
+        print(real_data[i])
