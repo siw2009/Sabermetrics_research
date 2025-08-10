@@ -18,5 +18,3 @@ def read_csv(path: str, types: list) -> list[list]:
             rlt.append(apply_types(file.readline().strip().split(','), types))
 
     return rlt
-
-print(*read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int]), sep = '\n')
