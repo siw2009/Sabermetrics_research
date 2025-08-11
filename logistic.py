@@ -31,21 +31,26 @@ def err(realdata: int, prediction: float) -> float:
 
 
 def learn_row(weights: list[float], slopes: list[float], step: float) -> list[float]:
-    # return [weights[i] + step * slopes[i]  for i in range(len(weights))]
-    return [step * slopes[i]  for i in range(len(weights))]
+    return [weights[i] + step * slopes[i]  for i in range(len(weights))]
+    # return [step * slopes[i]  for i in range(len(weights))]
 
 
 def learn(data: list[list], real_data: list[list], weight: list[float], bias: float, step: float) -> tuple[list[float], float]:
-    n = len(data)
-    weight_add = [0] * len(weight)
-    bias_add = 0
+    # n = len(data)
+    # weight_add = [0] * len(weight)
+    # bias_add = 0
+    weight_rlt = weight.copy()
+    bias_rlt = bias
     for i in range(len(data)):
-        prediction = predict(data[i], weight, bias)
-        for j,x in enumerate(learn_row(weight, slope(real_data[i][0], prediction, data[i]), step)):
-            weight_add[j] += x
-        bias_add += learn_row([bias], slope(real_data[i][0], prediction), step)[0]
+        prediction = predict(data[i], weight_rlt, bias_rlt)
+        weight_rlt = learn_row(weight_rlt, slope(real_data[i][0], prediction, data[i]), step)
+        # for j,x in enumerate(learn_row(weight, slope(real_data[i][0], prediction, data[i]), step)):
+        #     weight_add[j] += x
+        # bias_add += learn_row([bias], slope(real_data[i][0], prediction), step)[0]
+        bias_rlt = learn_row([bias_rlt], slope(real_data[i][0], prediction), step)[0]
 
-    return [weight[i] + weight_add[i] / n for i in range(len(weight))], bias + bias_add / n
+    # return [weight[i] + weight_add[i] / n for i in range(len(weight))], bias + bias_add / n
+    return weight_rlt, bias_rlt
 
 
 def read_data(paths: list[str]) -> list[list[float]]:
