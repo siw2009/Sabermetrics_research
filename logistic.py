@@ -70,7 +70,7 @@ data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19
 data_split = split_data(data, (3, 20, 1))
 
 
-step = 0.0001
+step = 0.00001
 # inputval = [random() * 6 -3  for _ in range(2)]
 inputval = data_split[1][:-1]
 # real_data = randint(0,1)
@@ -81,13 +81,12 @@ weight = [0] * len(data_split[1][0])
 bias = random()
 
 
-# err_pred = predict(data_split[1][-1], weight, bias)
-# print(err(data_split[2][-1][0], err_pred))
-for i in range(10**4):
+n = 10**6
+for i in range(n):
     weight, bias = learn(inputval, real_data, weight, bias, step)
 
     if i%10**3 == 0:
-        print(f'{i//100}%')
+        print(f'{i*100//n}%')
         print(weight, bias)
 
 for i in range(len(inputval)):
