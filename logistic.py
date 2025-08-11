@@ -88,8 +88,8 @@ for i in range(n):
     if i%10**3 == 0:
         # print(weight, bias)
 
-        for i in range(len(inputval)):
-            print(predict(inputval[i], weight, bias), end = ' ')
-            print(real_data[i])
-        print('-' * 100)
+        for j in range(len(inputval)):
+            print(predict(inputval[j], weight, bias), end = ' ')
+            print(real_data[j])
         print(f'{i*100//n}%')
+        print('-' * 100)
