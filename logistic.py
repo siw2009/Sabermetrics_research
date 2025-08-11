@@ -92,4 +92,3 @@ for i in range(n):
             print(predict(inputval[i], weight, bias), end = ' ')
             print(real_data[i])
         print('-' * 100)
-        print(f'{i*100//n}%')
