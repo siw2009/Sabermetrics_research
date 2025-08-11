@@ -81,14 +81,15 @@ weight = [0] * len(data_split[1][0])
 bias = random()
 
 
-n = 10**6
+n = 10**5
 for i in range(n):
     weight, bias = learn(inputval, real_data, weight, bias, step)
 
     if i%10**3 == 0:
-        print(f'{i*100//n}%')
-        print(weight, bias)
+        # print(weight, bias)
 
-for i in range(len(inputval)):
-    print(predict(inputval[i], weight, bias), end = ' ')
-    print(real_data[i])
+        for i in range(len(inputval)):
+            print(predict(inputval[i], weight, bias), end = ' ')
+            print(real_data[i])
+        print('-' * 100)
+        print(f'{i*100//n}%')
