@@ -31,18 +31,21 @@ def err(realdata: int, prediction: float) -> float:
 
 
 def learn_row(weights: list[float], slopes: list[float], step: float) -> list[float]:
-    return [weights[i] + step * slopes[i]  for i in range(len(weights))]
+    # return [weights[i] + step * slopes[i]  for i in range(len(weights))]
+    return [step * slopes[i]  for i in range(len(weights))]
 
 
 def learn(data: list[list], real_data: list[list], weight: list[float], bias: float, step: float) -> tuple[list[float], float]:
-    weight_rlt = weight.copy()
-    bias_rlt = bias
+    n = len(data)
+    weight_add = [0] * len(weight)
+    bias_add = 0
     for i in range(len(data)):
-        prediction = predict(data[i], weight_rlt, bias_rlt)
-        weight_rlt = learn_row(weight_rlt, slope(real_data[i][0], prediction, data[i]), step)
-        bias_rlt = learn_row([bias_rlt], slope(real_data[i][0], prediction), step)[0]
-    
-    return weight_rlt, bias_rlt
+        prediction = predict(data[i], weight, bias)
+        for j,x in enumerate(learn_row(weight, slope(real_data[i][0], prediction, data[i]), step)):
+            weight_add[j] += x
+        bias_add += learn_row([bias], slope(real_data[i][0], prediction), step)[0]
+
+    return [weight[i] + weight_add[i] / n for i in range(len(weight))], bias + bias_add / n
 
 
 def read_data(paths: list[str]) -> list[list[float]]:
@@ -75,13 +78,13 @@ bias = random()
 
 # err_pred = predict(data_split[1][-1], weight, bias)
 # print(err(data_split[2][-1][0], err_pred))
-for i in range(10**5):
+for i in range(10**4):
     weight, bias = learn(inputval, real_data, weight, bias, step)
 
     if i%10**3 == 0:
-        print(f'{i//1000}%')
+        print(f'{i//100}%')
+        print(weight, bias)
 
 for i in range(len(inputval)):
-    if real_data[i][0]:
-        print(predict(inputval[i], weight, bias), end = ' ')
-        print(real_data[i])
+    print(predict(inputval[i], weight, bias), end = ' ')
+    print(real_data[i])
