@@ -4,6 +4,7 @@ from data_reader import *
 
 
 
+# LUT로 대체하삼
 def sigmoid(x: float) -> float:
     try:
         k = e**x
