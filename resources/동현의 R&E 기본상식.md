@@ -6,6 +6,8 @@
 
 [모르는 용어있을때 검색 - 머신러닝 용어집](https://developers.google.com/machine-learning/glossary?hl=ko)
 
+[MathJax 문법](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)
+
 [pandas참조용 - pandas공식](https://pandas.pydata.org/docs/reference/index.html)
 
 [회귀계수 해석법 - tistory](https://bluediary8.tistory.com/157)\
