@@ -17,8 +17,8 @@ def ln(x, steps: int = 10**5, f = lambda x: 1/x) -> float:
     return (rlt + f(1) + f(x)) / 3 * width
 
 
-import sys
-sys.setrecursionlimit(10**8)
+# import sys
+# sys.setrecursionlimit(10**8)
 def get_e(low: float = 1.0, high: float = 3.0, x: int = 0, depth: int = 100, log_steps: int = 10000) -> float:
     m = (low + high) / 2
     if x == depth:  return m
