@@ -32,6 +32,3 @@ def get_e(low: float = 1.0, high: float = 3.0, x: int = 0, depth: int = 100, log
 
 
 e = get_e()
-print(e)
-from math import e as re
-print(re)

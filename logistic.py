@@ -1,5 +1,5 @@
-from math import e, log
 from random import random, randint
+from logarithm import *
 from data_reader import *
 
 
@@ -28,7 +28,7 @@ def slope(realdata: int, prediction: float, inputval: list[float] = [1.0]) -> li
 
 def err(realdata: int, prediction: float) -> float:
     if prediction == 1:  return 0
-    return (realdata-1) * log(-prediction+1, e) - realdata * log(prediction, e)
+    return (realdata-1) * ln(-prediction+1) - realdata * ln(prediction)
 
 
 def learn_row(weights: list[float], slopes: list[float], step: float) -> list[float]:
