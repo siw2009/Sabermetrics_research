@@ -4,21 +4,24 @@ from data_reader import *
 
 
 
-def create_sigmoidLUT(start: float, end: float, datacount: int) -> list[tuple[float, float]]:
-    rlt = []
-    for x in range(datacount):
-        value = (start * (datacount - x) + end * x) / datacount
-        rlt.append((x, sigmoid(value)))
-    
-    return rlt
-
-
 def sigmoid(x: float) -> float:
     try:
         k = e**x
         return k / (k+1)
     except OverflowError:
         return 1
+
+
+def create_sigmoidLUT(start: float, end: float, datacount: int, filepath: str = './sigmoidLUT.txt'):
+    with open(filepath, 'w') as file:  file.write('')
+    with open(filepath, 'a') as file:
+        for x in range(datacount):
+            value = (start * (datacount - x) + end * x) / datacount
+            file.write(str((value, sigmoid(value))))
+            file.write('\n')
+
+create_sigmoidLUT(-10**3, 10**3, 10**6)
+exit()
 
 
 def discrete(x: float) -> int:
