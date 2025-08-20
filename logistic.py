@@ -1,13 +1,18 @@
-from random import *
+from newrandom import *
 from logarithm import *
 from data_reader import *
 
 
 
-def create_sigmoidLUT(start: float, end: float, datacount: int):  pass
+def create_sigmoidLUT(start: float, end: float, datacount: int) -> list[tuple[float, float]]:
+    rlt = []
+    for x in range(datacount):
+        value = (start * (datacount - x) + end * x) / datacount
+        rlt.append((x, sigmoid(value)))
+    
+    return rlt
 
 
-# LUT로 대체하삼
 def sigmoid(x: float) -> float:
     try:
         k = e**x
