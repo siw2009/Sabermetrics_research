@@ -4,6 +4,9 @@ from data_reader import *
 
 
 
+def create_sigmoidLUT(start: float, end: float, datacount: int):  pass
+
+
 # LUT로 대체하삼
 def sigmoid(x: float) -> float:
     try:
