@@ -56,15 +56,6 @@ def sigmoidLUT(x: float, LUT: list[tuple[float, float]]) -> float:
     return sigmoidLUT_bisect(x, LUT, 0, len(LUT)-1)
 
 
-rlt = 0
-sigLUT = load_sigmoidLUT()
-for i in range(-1000, 101):
-    rlt += (sigmoidLUT(i, sigLUT) - sigmoid(i)) ** 2
-print(rlt / 1100)
-
-exit()
-
-
 def discrete(x: float) -> int:
     return 1  if x>0.5 else  0
 
