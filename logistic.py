@@ -20,7 +20,7 @@ def create_sigmoidLUT(start: float, end: float, datacount: int, filepath: str = 
             file.write(f'{value}, {sigmoid(value)},')
             file.write('\n')
 
-create_sigmoidLUT(-745.2, 37.44, 10**6, './sigmoidLUT.csv')
+create_sigmoidLUT(-745.2, 37.44, 2*10**6, './sigmoidLUT.csv')
 exit()
 
 
