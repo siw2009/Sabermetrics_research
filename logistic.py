@@ -34,14 +34,14 @@ def load_sigmoidLUT(filepath: str = './sigmoidLUT.csv') -> list[tuple[float, flo
 
 
 def sigmoidLUT_bisect(x: float, LUT: list[tuple[float, float]], low: int, high: int) -> float:
-    if low >= high:  return LUT[low][1]
+    if low > high:  return LUT[low][1]
 
-    print(low, high)
     m = (low + high) // 2
+    if LUT[m][0] == x:  return LUT[m][1]
     if LUT[m][0] > x:
         return sigmoidLUT_bisect(x, LUT, low, m-1)
     else:
-        return sigmoidLUT_bisect(x, LUT, m, high)
+        return sigmoidLUT_bisect(x, LUT, m+1, high)
 
 
 def sigmoidLUT(x: float, LUT: list[tuple[float, float]]) -> float:
@@ -56,9 +56,12 @@ def sigmoidLUT(x: float, LUT: list[tuple[float, float]]) -> float:
     return sigmoidLUT_bisect(x, LUT, 0, len(LUT)-1)
 
 
-# print(load_sigmoidLUT()[:100])
-print(sigmoidLUT(10, load_sigmoidLUT()))
-print(sigmoid(10))
+rlt = 0
+sigLUT = load_sigmoidLUT()
+for i in range(-1000, 101):
+    rlt += (sigmoidLUT(i, sigLUT) - sigmoid(i)) ** 2
+print(rlt / 1100)
+
 exit()
 
 
