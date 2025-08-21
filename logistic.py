@@ -1,4 +1,4 @@
-from newrandom import *
+from random import *
 from logarithm import *
 from data_reader import *
 
@@ -62,7 +62,7 @@ def discrete(x: float) -> int:
 
 def predict(input_data: list[float], weights: list[float], bias: float) -> float:
     # print(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias)
-    return sigmoid(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias)
+    return sigmoidLUT(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias, sigLUT)
 
 
 def slope(realdata: int, prediction: float, inputval: list[float] = [1.0]) -> list[float]:
@@ -112,6 +112,7 @@ def read_data(paths: list[str]) -> list[list[float]]:
 
 data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
 data_split = split_data(data, (3, 20, 1))
+sigLUT = load_sigmoidLUT()
 
 
 step = 0.00001
