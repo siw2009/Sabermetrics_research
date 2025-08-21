@@ -17,20 +17,49 @@ def sigmoid(x: float) -> float:
 #     with open(filepath, 'a') as file:
 #         for x in range(datacount):
 #             value = (start * (datacount - x -1) + end * x) / (datacount -1)
-#             file.write(f'{value}, {sigmoid(value)},')
+#             file.write(f' {value}, {sigmoid(value)},')
 #             file.write('\n')
 
 # create_sigmoidLUT(-745.2, 37.44, 2*10**6)
 # exit()
 
 
-def load_sigmoidLUT(filepath: str = './sigmoidLUT.csv') -> list[tuple[int, int]]:
+def load_sigmoidLUT(filepath: str = './sigmoidLUT.csv') -> list[tuple[float, float]]:
     rlt = []
     with open(filepath, 'r') as file:
         while file.read(1):
-            rlt.append(list(map(float, file.readline().strip().split(',')[:-1])))
+            rlt.append(tuple(map(float, file.readline().split(',')[:-1])))
 
     return rlt
+
+
+def sigmoidLUT_bisect(x: float, LUT: list[tuple[float, float]], low: int, high: int) -> float:
+    if low >= high:  return LUT[low][1]
+
+    print(low, high)
+    m = (low + high) // 2
+    if LUT[m][0] > x:
+        return sigmoidLUT_bisect(x, LUT, low, m-1)
+    else:
+        return sigmoidLUT_bisect(x, LUT, m, high)
+
+
+def sigmoidLUT(x: float, LUT: list[tuple[float, float]]) -> float:
+    '''
+    sigmoid LUT must be formatted as list of
+
+    ### **(*x value*, *the sigmoid value of the corresponding x value*)**
+    '''
+
+    if x < LUT[0][0]:  return LUT[0][1]
+    if x > LUT[-1][0]:  return LUT[-1][1]
+    return sigmoidLUT_bisect(x, LUT, 0, len(LUT)-1)
+
+
+# print(load_sigmoidLUT()[:100])
+print(sigmoidLUT(10, load_sigmoidLUT()))
+print(sigmoid(10))
+exit()
 
 
 def discrete(x: float) -> int:
