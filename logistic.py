@@ -12,7 +12,7 @@ def sigmoid(x: float) -> float:
         return 1
 
 
-# def create_sigmoidLUT(start: float, end: float, datacount: int, filepath: str = './sigmoidLUT.txt'):
+# def create_sigmoidLUT(start: float, end: float, datacount: int, filepath: str = './sigmoidLUT.csv'):
 #     with open(filepath, 'w') as file:  file.write('')
 #     with open(filepath, 'a') as file:
 #         for x in range(datacount):
@@ -20,12 +20,17 @@ def sigmoid(x: float) -> float:
 #             file.write(f'{value}, {sigmoid(value)},')
 #             file.write('\n')
 
-# create_sigmoidLUT(-745.2, 37.44, 2*10**6, './sigmoidLUT.csv')
+# create_sigmoidLUT(-745.2, 37.44, 2*10**6)
 # exit()
 
 
-def load_sigmoidLUT(filepath: str = './sigmoidLUT.txt') -> list[tuple[int, int]]:
-    with open(filepath)
+def load_sigmoidLUT(filepath: str = './sigmoidLUT.csv') -> list[tuple[int, int]]:
+    rlt = []
+    with open(filepath, 'r') as file:
+        while file.read(1):
+            rlt.append(list(map(float, file.readline().strip().split(',')[:-1])))
+
+    return rlt
 
 
 def discrete(x: float) -> int:
