@@ -24,52 +24,61 @@ except Exception:
 
 data_list = []
 def scrape_all_pages():
-    global data_list
+    global data_list, url
     page_num = 1
     
     while True:
-        # for i in range(3):
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "bui-tableis-desktop-HChWpztF")))
-        time.sleep(0.5)
-        table = driver.find_element(By.CLASS_NAME, "table-wrapper-mxbeN3qL")
-        print('aaaaaaaaaaaaaaaaaaaaaaa')
-        print((type(table)))
-        html = table.get_attribute('outerHTML')
-        df = pd.read_html(StringIO(html))[0]
-        print(df)
+        # next_btn = driver.find_element(By.CLASS_NAME, "button-E_ZPKDKl.paginationSide-hjd48DIF")
+        # if 'disabled' in next_btn.get_attribute('class'):
+        #     print("마지막 페이지")
+        
+        
+        # # driver.execute_script()
+        # wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'button-E_ZPKDKl.paginationSide-hjd48DIF')))
+        # next_btn.click()
+        
+        next_url = url + f'?page={page_num}'
+        driver.execute_script("window.location.href = arguments[0];", next_url)
+        print(driver.current_url)
 
+        # for i in range(3):
+        # wait.until(EC.presence_of_element_located((By.CLASS_NAME, "table-scroller-GsCM0EhIscroller")))
+        # time.sleep(0.5)
+        driver.implicitly_wait(5)
+        try:
+            table = driver.find_element(By.CLASS_NAME, "table-wrapper-mxbeN3qL")
+            print((type(table)))
+            html = table.get_attribute('outerHTML')
+            df = pd.read_html(StringIO(html))[0]
+            print(df)
+        except:
+            print('data 없음', page_num)
+        print(driver.current_url)
             # if not df.empty: 
             #     break
             # else:
             #     print(f"")
             #     time.sleep(1)
+        
 
         data_list.append(df)
         print(f"[페이지 {page_num}] 행 개수: {len(df)}")
 
         
-        try:
-            next_btn = driver.find_element(By.CLASS_NAME, "button-E_ZPKDKlpaginationSide-hjd48DIF")
-            if 'disabled' in next_btn.get_attribute('class'):
-                print("마지막 페이지")
-                break
-            
-            
-            wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'button-E_ZPKDKlpaginationSide-hjd48DIF')))
-            next_btn.click()
-            page_num += 1
+        page_num += 1
 
-            
-            # wait.until(EC.presence_of_element_located((By.CLASS_NAME, "bui-table")))
-        except Exception:
-            print("끝")
+        print("끝")
+        if page_num==883:
+            print("수집 끝")
             break
 
     return data_list
 
 print("스크래핑 시작")
-all_data = scrape_all_pages()
-
+try:
+    all_data = scrape_all_pages()
+except:
+    pass
 # ===== 저장 =====
 if all_data:
     final_df = pd.concat(all_data, ignore_index=True)
