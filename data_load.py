@@ -58,7 +58,7 @@ def scrape_all_pages():
             #     break
             # else:
             #     print(f"")
-            #     time.sleep(1)
+            #     time.sleep(1) MUC
         
 
         data_list.append(df)
