@@ -25,37 +25,25 @@ def scrape_all_pages():
     global data_list, url
     page_num = 1
     
-    while True:
-        # next_btn = driver.find_element(By.CLASS_NAME, "button-E_ZPKDKl.paginationSide-hjd48DIF")
-        # if 'disabled' in next_btn.get_attribute('class'):
-        #     print("마지막 페이지")
-        
-        # # driver.execute_script()
-        # wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'button-E_ZPKDKl.paginationSide-hjd48DIF')))
-        # next_btn.click()
-        
+    while True:        
         next_url = url + f'?page={page_num}'
-        driver.execute_script("window.location.href = arguments[0];", next_url)
-        print(driver.current_url)
+        
+        driver.execute_script("window.location.href = arguments[0];", next_url) # debug
+        print(driver.current_url) # debug
 
-        # for i in range(3):
-        # wait.until(EC.presence_of_element_located((By.CLASS_NAME, "table-scroller-GsCM0EhIscroller")))
-        # time.sleep(0.5)
         driver.implicitly_wait(5)
+
+        # data table save
         try:
             table = driver.find_element(By.CLASS_NAME, "table-wrapper-mxbeN3qL")
-            print((type(table)))
+            print((type(table))) # debug
             html = table.get_attribute('outerHTML')
             df = pd.read_html(StringIO(html))[0]
-            print(df)
+            print(df) # debug
         except:
             print('data 없음', page_num)
+
         print(driver.current_url)
-            # if not df.empty: 
-            #     break
-            # else:
-            #     print(f"")
-            #     time.sleep(1) MUC
         
         data_list.append(df)
         print(f"[페이지 {page_num}] 행 개수: {len(df)}")
