@@ -70,6 +70,6 @@ if all_data:
     final_df.to_excel(save_path, index=False)
     print(f"데이터 저장 완료: {save_path} / 총 {len(final_df)}행")
 else:
-    print(" 수집된 데이터가 없습니다.")
+    print("수집된 데이터가 없습니다.")
 
 driver.quit()
