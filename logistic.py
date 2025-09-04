@@ -27,8 +27,8 @@ def sigmoid(x: float) -> float:
 def load_sigmoidLUT(filepath: str = './sigmoidLUT.csv') -> list[tuple[float, float]]:
     rlt = []
     with open(filepath, 'r') as file:
-        while file.read(1):
-            rlt.append(tuple(map(float, file.readline().split(',')[:-1])))
+        for line in file:
+            rlt.append(tuple(map(float, line.strip().split(',')[:-1])))
 
     return rlt
 
