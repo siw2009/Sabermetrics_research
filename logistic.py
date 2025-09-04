@@ -1,10 +1,9 @@
-from math import e, log
-from random import random, randint
+from random import *
+from logarithm import *
 from data_reader import *
 
 
 
-# LUT로 대체하삼
 def sigmoid(x: float) -> float:
     try:
         k = e**x
@@ -13,13 +12,57 @@ def sigmoid(x: float) -> float:
         return 1
 
 
+# def create_sigmoidLUT(start: float, end: float, datacount: int, filepath: str = './sigmoidLUT.csv'):
+#     with open(filepath, 'w') as file:  file.write('')
+#     with open(filepath, 'a') as file:
+#         for x in range(datacount):
+#             value = (start * (datacount - x -1) + end * x) / (datacount -1)
+#             file.write(f' {value}, {sigmoid(value)},')
+#             file.write('\n')
+
+# create_sigmoidLUT(-745.2, 37.44, 2*10**6)
+# exit()
+
+
+def load_sigmoidLUT(filepath: str = './sigmoidLUT.csv') -> list[tuple[float, float]]:
+    rlt = []
+    with open(filepath, 'r') as file:
+        while file.read(1):
+            rlt.append(tuple(map(float, file.readline().split(',')[:-1])))
+
+    return rlt
+
+
+def sigmoidLUT_bisect(x: float, LUT: list[tuple[float, float]], low: int, high: int) -> float:
+    if low > high:  return LUT[low][1]
+
+    m = (low + high) // 2
+    if LUT[m][0] == x:  return LUT[m][1]
+    if LUT[m][0] > x:
+        return sigmoidLUT_bisect(x, LUT, low, m-1)
+    else:
+        return sigmoidLUT_bisect(x, LUT, m+1, high)
+
+
+def sigmoidLUT(x: float, LUT: list[tuple[float, float]]) -> float:
+    '''
+    sigmoid LUT must be formatted as list of
+
+    ### **(*x value*, *the sigmoid value of the corresponding x value*)**
+    '''
+
+    if x < LUT[0][0]:  return LUT[0][1]
+    if x > LUT[-1][0]:  return LUT[-1][1]
+    return sigmoidLUT_bisect(x, LUT, 0, len(LUT)-1)
+
+
 def discrete(x: float) -> int:
     return 1  if x>0.5 else  0
 
 
 def predict(input_data: list[float], weights: list[float], bias: float) -> float:
     # print(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias)
-    return sigmoid(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias)
+    return sigmoidLUT(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias, sigLUT)
 
 
 def slope(realdata: int, prediction: float, inputval: list[float] = [1.0]) -> list[float]:
@@ -28,7 +71,7 @@ def slope(realdata: int, prediction: float, inputval: list[float] = [1.0]) -> li
 
 def err(realdata: int, prediction: float) -> float:
     if prediction == 1:  return 0
-    return (realdata-1) * log(-prediction+1, e) - realdata * log(prediction, e)
+    return (realdata-1) * ln(-prediction+1) - realdata * ln(prediction)
 
 
 def learn_row(weights: list[float], slopes: list[float], step: float) -> list[float]:
@@ -69,6 +112,7 @@ def read_data(paths: list[str]) -> list[list[float]]:
 
 data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
 data_split = split_data(data, (3, 20, 1))
+sigLUT = load_sigmoidLUT()
 
 
 step = 0.00001
