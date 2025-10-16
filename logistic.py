@@ -110,31 +110,29 @@ def read_data(paths: list[str]) -> list[list[float]]:
 
 
 
-data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
-data_split = split_data(data, (3, 20, 1))
+# data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
+data = read_csv('./datasets/MLB_dataset_clean.csv', [str] + [int] * 12 + [float] * 4)[1:]
+data_split_raw = split_data(data, (1, 12, 1, 3))
+data_split = [data_split_raw[0], merge_data(data_split_raw[1], data_split_raw[3]), data_split_raw[2]]
 sigLUT = load_sigmoidLUT()
 
 
 step = 0.00001
-# inputval = [random() * 6 -3  for _ in range(2)]
-inputval = data_split[1][:-1]
-# real_data = randint(0,1)
-real_data = data_split[2][:-1]
-# weight = [random() for _ in range(len(data_split[1][0]))]
+inputval = data_split[1]
+real_data = data_split[2]
 weight = [0] * len(data_split[1][0])
-# bias = random() * 5 - 2
 bias = random()
 
 
-n = 10**5
+n = 10**4
 for i in range(n):
     weight, bias = learn(inputval, real_data, weight, bias, step)
 
     if i%10**3 == 0:
         # print(weight, bias)
-
-        for j in range(len(inputval)):
-            print(predict(inputval[j], weight, bias), end = ' ')
-            print(real_data[j])
         print(f'{i*100//n}%')
-        print('-' * 100)
+
+
+for j in range(len(inputval)):
+    print(predict(inputval[j], weight, bias), end = ' ')
+    print(real_data[j])

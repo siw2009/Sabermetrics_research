@@ -1,5 +1,24 @@
+def default_values(typestr):
+    match typestr:
+        case '<class \'int\'>' | '<class \'float\'>':
+            return 0
+        case '<class \'str\'>':
+            return ''
+        case _:
+            return None
+
+
 def apply_types(target: list, types: list) -> list:
-    return [types[i](target[i]) for i in range(len(target))]
+    rlt = []
+    for i in range(len(target)):
+        try:
+            rlt.append(types[i](target[i]))
+        except ValueError:
+            rlt.append(default_values(str(types[i])))
+        except IndexError:
+            rlt.append(None)
+    
+    return rlt
 
 
 def read_csv(path: str, types: list) -> list[list]:
@@ -33,3 +52,9 @@ def split_data(data: list[list], split_by: tuple) -> list[list[list]]:
             idx += split_by[j]
     
     return rlt
+
+
+
+def merge_data(data1: list[list], data2: list[list]) -> list[list]:
+    length = min(len(data1), len(data2))
+    return [data1[i] + data2[i] for i in range(length)]
