@@ -2,10 +2,10 @@ from logistic import predict
 
 
 
-SAVEFILEPATH = './logistic_savefile/1761655000.605278.txt'
+SAVEFILEPATH = './logistic_savefile/1761722135.5357535.txt'
 with open(SAVEFILEPATH, 'r') as file:
     weight = []
-    for _ in range(9):
+    for _ in range(15):
         weight.append(float(file.readline().strip()))
     bias = float(file.readline().strip())
 
