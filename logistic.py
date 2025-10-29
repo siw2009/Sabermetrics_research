@@ -74,6 +74,10 @@ def err(realdata: int, prediction: float) -> float:
     return (realdata-1) * ln(-prediction+1) - realdata * ln(prediction)
 
 
+def err_entropy(realdata: int, prediction: float) -> float:
+    return -realdata * ln(prediction)
+
+
 def learn_row(weights: list[float], slopes: list[float], step: float) -> list[float]:
     return [weights[i] + step * slopes[i]  for i in range(len(weights))]
     # return [step * slopes[i]  for i in range(len(weights))]
@@ -105,16 +109,38 @@ def read_data(paths: list[str]) -> list[list[float]]:
         with open(path, 'r') as f:
             for i in range(10000):
                 rlt[-1].append(float(f.readline()))
-    
+
     return rlt
 
 
 
 # data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
-data = read_csv('./datasets/MLB_dataset_clean.csv', [str] + [int] * 12 + [float] * 4)[1:]
-data_split_raw = split_data(data, (1, 12, 1, 3))
+data = read_csv('./datasets/MLB_전처리 데이터_AVG.csv', [str] + [int] * 5 + [float] * 5)[1:]
+data_split_raw = split_data(data, (1, 5, 1, 4))
 data_split = [data_split_raw[0], merge_data(data_split_raw[1], data_split_raw[3]), data_split_raw[2]]
 sigLUT = load_sigmoidLUT()
+
+
+
+with open('./logistic_savefile/1761655000.605278.txt', 'r') as file:
+    weight = []
+    for _ in range(9):
+        weight.append(float(file.readline().strip()))
+    bias = float(file.readline().strip())
+
+#     rlt = 0
+#     for row in data:
+#         # print(row[1:6] + row[7:11])
+#         error = err_entropy(row[6], predict(row[1:6] + row[7:11], weight, bias))
+#         rlt += error
+#         # print(error)
+
+# print(rlt / len(data))
+from sklearn.metrics import log_loss
+print(log_loss([row[6] for row in data], [predict(row[1:6] + row[7:11], weight, bias) for row in data]))
+exit()
+
+
 
 step = 0.00001
 inputval = data_split[1]
@@ -123,7 +149,7 @@ weight = [0] * len(data_split[1][0])
 bias = random()
 
 
-n = 10 ** 4
+n = 10 ** 5
 for i in range(n):
     weight, bias = learn(inputval, real_data, weight, bias, step)
 
