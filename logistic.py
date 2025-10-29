@@ -117,7 +117,8 @@ def read_data(paths: list[str]) -> list[list[float]]:
 sigLUT = load_sigmoidLUT()
 if __name__ == '__main__':
     # data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
-    data = read_csv('./datasets/MLB_전처리 데이터_AVG.csv', [str] + [int] * 5 + [float] * 5)[1:]
+    # data = read_csv('./datasets/MLB_전처리 데이터_AVG.csv', [str] + [int] * 5 + [float] * 5)[1:]
+    data = read_csv('./datasets/MLB_dataset.csv', [str] + [int] * 5 + [float] * 5)[1:]
     data_split_raw = split_data(data, (1, 5, 1, 4))
     data_split = [data_split_raw[0], merge_data(data_split_raw[1], data_split_raw[3]), data_split_raw[2]]
 
