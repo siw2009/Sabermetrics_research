@@ -74,6 +74,10 @@ def err(realdata: int, prediction: float) -> float:
     return (realdata-1) * ln(-prediction+1) - realdata * ln(prediction)
 
 
+def err_entropy(realdata: int, prediction: float) -> float:
+    return -realdata * ln(prediction)  if prediction > 0 else  0
+
+
 def learn_row(weights: list[float], slopes: list[float], step: float) -> list[float]:
     return [weights[i] + step * slopes[i]  for i in range(len(weights))]
     # return [step * slopes[i]  for i in range(len(weights))]
@@ -105,43 +109,67 @@ def read_data(paths: list[str]) -> list[list[float]]:
         with open(path, 'r') as f:
             for i in range(10000):
                 rlt[-1].append(float(f.readline()))
-    
+
     return rlt
 
 
 
-# data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
-data = read_csv('./datasets/MLB_dataset_clean.csv', [str] + [int] * 12 + [float] * 4)[1:]
-data_split_raw = split_data(data, (1, 12, 1, 3))
-data_split = [data_split_raw[0], merge_data(data_split_raw[1], data_split_raw[3]), data_split_raw[2]]
 sigLUT = load_sigmoidLUT()
-
-step = 0.00001
-inputval = data_split[1]
-real_data = data_split[2]
-weight = [0] * len(data_split[1][0])
-bias = random()
-
-
-n = 10 ** 4
-for i in range(n):
-    weight, bias = learn(inputval, real_data, weight, bias, step)
-
-    if i%10**3 == 0:
-        # print(weight, bias)
-        print(f'{i*100//n}%')
-
-
-# for j in range(len(inputval)):
-#     print(predict(inputval[j], weight, bias), end = ' ')
-#     print(real_data[j])
+if __name__ == '__main__':
+    # data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
+    # data = read_csv('./datasets/MLB_전처리 데이터_AVG.csv', [str] + [int] * 5 + [float] * 5)[1:]
+    data = read_csv('./datasets/MLB_dataset_clean.csv', [str] + [int] * 12 + [float] * 4)[1:]
+    # data_split_raw = split_data(data, (1, 5, 1, 4))
+    data_split_raw = split_data(data, (1, 12, 1, 3))
+    data_split = [data_split_raw[0], merge_data(data_split_raw[1], data_split_raw[3]), data_split_raw[2]]
 
 
 
-from time import time
-timestamp = time()
-with open(f'./logistic_savefile/{timestamp}.txt', 'w') as file: file.write('')
-with open(f'./logistic_savefile/{timestamp}.txt', 'a') as file:
-    for x in weight:
-        file.write(f'{x}\n')
-    file.write(str(bias))
+    # SAVEFILEPATH = './logistic_savefile/1761722135.5357535.txt'
+    # with open(SAVEFILEPATH, 'r') as file:
+    #     weight = []
+    #     for _ in range(9):
+    #         weight.append(float(file.readline().strip()))
+    #     bias = float(file.readline().strip())
+
+    #     rlt = 0
+    #     for row in data:
+    #         # print(row[1:6] + row[7:11])
+    #         error = err_entropy(row[6], predict(row[1:6] + row[7:11], weight, bias))
+    #         rlt += error
+    #         # print(error)
+
+    # print(rlt / len(data))
+    # exit()
+
+
+
+    step = 0.0001
+    inputval = data_split[1]
+    real_data = data_split[2]
+    weight = [0] * len(data_split[1][0])
+    bias = random()
+
+
+    n = 10 ** 4 * 3
+    for i in range(n):
+        weight, bias = learn(inputval, real_data, weight, bias, step)
+
+        if i%10**3 == 0:
+            # print(weight, bias)
+            print(f'{i*100//n}%')
+
+
+    # for j in range(len(inputval)):
+    #     print(predict(inputval[j], weight, bias), end = ' ')
+    #     print(real_data[j])
+
+
+
+    from time import time
+    timestamp = time()
+    with open(f'./logistic_savefile/{timestamp}.txt', 'w') as file: file.write('')
+    with open(f'./logistic_savefile/{timestamp}.txt', 'a') as file:
+        for x in weight:
+            file.write(f'{x}\n')
+        file.write(str(bias))
