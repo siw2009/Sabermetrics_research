@@ -5,11 +5,12 @@ from data_reader import *
 
 
 def sigmoid(x: float) -> float:
-    try:
+
+    if x < 0:
         k = e**x
         return k / (k+1)
-    except OverflowError:
-        return 1
+    else:
+        return 1 / (e**(-x) +1)
 
 
 # def create_sigmoidLUT(start: float, end: float, datacount: int, filepath: str = './sigmoidLUT.csv'):
@@ -62,7 +63,8 @@ def discrete(x: float) -> int:
 
 def predict(input_data: list[float], weights: list[float], bias: float) -> float:
     # print(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias)
-    return sigmoidLUT(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias, sigLUT)
+    # return sigmoidLUT(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias, sigLUT)
+    return sigmoid(sum([input_data[i] * weights[i] for i in range(len(weights))]) + bias)
 
 
 def slope(realdata: int, prediction: float, inputval: list[float] = [1.0]) -> list[float]:
@@ -114,7 +116,7 @@ def read_data(paths: list[str]) -> list[list[float]]:
 
 
 
-sigLUT = load_sigmoidLUT()
+# sigLUT = load_sigmoidLUT()
 if __name__ == '__main__':
     # data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
     # data = read_csv('./datasets/MLB_전처리 데이터_AVG.csv', [str] + [int] * 5 + [float] * 5)[1:]
@@ -125,30 +127,30 @@ if __name__ == '__main__':
 
 
 
-    SAVEFILEPATH = './logistic_savefile/1761728506.7493048.txt'
-    with open(SAVEFILEPATH, 'r') as file:
-        weight = []
-        for _ in range(15):
-            weight.append(float(file.readline().strip()))
-        bias = float(file.readline().strip())
+    # SAVEFILEPATH = './logistic_savefile/1761722135.5357535.txt'
+    # with open(SAVEFILEPATH, 'r') as file:
+    #     weight = []
+    #     for _ in range(9):
+    #         weight.append(float(file.readline().strip()))
+    #     bias = float(file.readline().strip())
 
-        rlt = 0
-        for row in data:
-            # print(row[1:6] + row[7:11])
-            error = err_entropy(row[13], predict(row[1:13] + row[14:], weight, bias))
-            rlt += error
-            # print(error)
+    #     rlt = 0
+    #     for row in data:
+    #         # print(row[1:6] + row[7:11])
+    #         error = err_entropy(row[13], predict(row[1:13] + row[14:], weight, bias))
+    #         rlt += error
+    #         # print(error)
 
-        # row = data[874]
-        # print(predict(row[1:13] + row[14:17], weight, bias), row[13])
-        # print(row[1:13]+row[14:17], row[13])
+    #     # row = data[874]
+    #     # print(predict(row[1:13] + row[14:17], weight, bias), row[13])
+    #     # print(row[1:13]+row[14:17], row[13])
 
-    print(rlt / len(data))
-    exit()
+    # print(rlt / len(data))
+    # exit()
 
 
 
-    step = 0.0001
+    step = 0.001
     inputval = data_split[1]
     real_data = data_split[2]
     weight = [0] * len(data_split[1][0])
