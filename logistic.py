@@ -120,37 +120,41 @@ def read_data(paths: list[str]) -> list[list[float]]:
 if __name__ == '__main__':
     # data = read_csv('./inputs/darwin (testdata).csv', [int, str, str] + [float] * 19 + [int, int])[1:]
     # data = read_csv('./datasets/MLB_전처리 데이터_AVG.csv', [str] + [int] * 5 + [float] * 5)[1:]
-    data = read_csv('./datasets/MLB_dataset_clean.csv', [str] + [int] * 12 + [float] * 4)[1:]
-    # data_split_raw = split_data(data, (1, 5, 1, 4))
-    data_split_raw = split_data(data, (1, 12, 1, 3))
-    data_split = [data_split_raw[0], merge_data(data_split_raw[1], data_split_raw[3]), data_split_raw[2]]
+    # data = read_csv('./datasets/MLB_dataset_clean.csv', [str] + [int] * 12 + [float] * 4)[1:]
+    data = read_csv('./datasets/MLB_dataset2.csv', [str] + [int] * 5 + [float] * 5)[1:]
+    data_split_raw = split_data(data, (1, 5, 1, 4))
+    # data_split_raw = split_data(data, (1, 12, 1, 3))
+    # data_split = [data_split_raw[0], merge_data(data_split_raw[1], data_split_raw[3]), data_split_raw[2]]
+    data_split = [data_split_raw[0], data_split_raw[3], data_split_raw[2]]
 
 
 
-    # SAVEFILEPATH = './logistic_savefile/1761722135.5357535.txt'
-    # with open(SAVEFILEPATH, 'r') as file:
-    #     weight = []
-    #     for _ in range(9):
-    #         weight.append(float(file.readline().strip()))
-    #     bias = float(file.readline().strip())
+    SAVEFILEPATH = './logistic_savefile/1762328138.1606686.txt'
+    with open(SAVEFILEPATH, 'r') as file:
+        weight = []
+        for _ in range(4):
+            weight.append(float(file.readline().strip()))
+        bias = float(file.readline().strip())
 
-    #     rlt = 0
-    #     for row in data:
-    #         # print(row[1:6] + row[7:11])
-    #         error = err_entropy(row[13], predict(row[1:13] + row[14:], weight, bias))
-    #         rlt += error
-    #         # print(error)
+        # rlt = 0
+        # for row in data:
+        #     # print(row[1:6] + row[7:11])
+        #     # error = err(row[13], predict(row[1:13] + row[14:], weight, bias))
+        #     error = err_entropy(row[6], predict(row[7:11], weight, bias))
+        #     rlt += error
+        #     # print(error)
 
-    #     # row = data[874]
-    #     # print(predict(row[1:13] + row[14:17], weight, bias), row[13])
-    #     # print(row[1:13]+row[14:17], row[13])
+        for i in range(100):
+            row = data[i]
+            # print(predict(row[1:13] + row[14:17], weight, bias), row[13])
+            print(round(predict(row[7:11], weight, bias), 3), row[6])
 
     # print(rlt / len(data))
-    # exit()
+    exit()
 
 
 
-    step = 0.001
+    step = 0.0001
     inputval = data_split[1]
     real_data = data_split[2]
     weight = [0] * len(data_split[1][0])
