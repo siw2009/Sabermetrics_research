@@ -125,22 +125,26 @@ if __name__ == '__main__':
 
 
 
-    # SAVEFILEPATH = './logistic_savefile/1761722135.5357535.txt'
-    # with open(SAVEFILEPATH, 'r') as file:
-    #     weight = []
-    #     for _ in range(9):
-    #         weight.append(float(file.readline().strip()))
-    #     bias = float(file.readline().strip())
+    SAVEFILEPATH = './logistic_savefile/1761722135.5357535.txt'
+    with open(SAVEFILEPATH, 'r') as file:
+        weight = []
+        for _ in range(9):
+            weight.append(float(file.readline().strip()))
+        bias = float(file.readline().strip())
 
-    #     rlt = 0
-    #     for row in data:
-    #         # print(row[1:6] + row[7:11])
-    #         error = err_entropy(row[6], predict(row[1:6] + row[7:11], weight, bias))
-    #         rlt += error
-    #         # print(error)
+        rlt = 0
+        for row in data:
+            # print(row[1:6] + row[7:11])
+            error = err_entropy(row[6], predict(row[1:13] + row[14:], weight, bias))
+            rlt += error
+            # print(error)
 
-    # print(rlt / len(data))
-    # exit()
+        # row = data[874]
+        # print(predict(row[1:13] + row[14:17], weight, bias), row[13])
+        # print(row[1:13]+row[14:17], row[13])
+
+    print(rlt / len(data))
+    exit()
 
 
 
