@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from io import StringIO
 import time
-
+#인우 딱딲
 T = time.time()
 url = "https://www.koreabaseball.com/Record/Player/HitterBasic/BasicOld.aspx" # 크롤링할 사이트 url
 save_path = "./datasets/데이터2.xlsx" # 파일 저장 경로
