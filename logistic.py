@@ -136,20 +136,20 @@ if __name__ == '__main__':
             weight.append(float(file.readline().strip()))
         bias = float(file.readline().strip())
 
-        # rlt = 0
-        # for row in data:
-        #     # print(row[1:6] + row[7:11])
-        #     # error = err(row[13], predict(row[1:13] + row[14:], weight, bias))
-        #     error = err_entropy(row[6], predict(row[7:11], weight, bias))
-        #     rlt += error
-        #     # print(error)
+        rlt = 0
+        for row in data:
+            # print(row[1:6] + row[7:11])
+            # error = err(row[13], predict(row[1:13] + row[14:], weight, bias))
+            error = err_entropy(row[6], predict(row[7:11], weight, bias))
+            rlt += error
+            # print(error)
 
-        for i in range(100):
-            row = data[i]
-            # print(predict(row[1:13] + row[14:17], weight, bias), row[13])
-            print(round(predict(row[7:11], weight, bias), 3), row[6])
+        # for i in range(100):
+        #     row = data[i]
+        #     # print(predict(row[1:13] + row[14:17], weight, bias), row[13])
+        #     print(round(predict(row[7:11], weight, bias), 3), row[6])
 
-    # print(rlt / len(data))
+    print(rlt / len(data))
     exit()
 
 
